@@ -14,7 +14,7 @@ export default class NavBar extends React.Component {
     if (window.location.hash === "#" + event.target.id) {
       window.location.reload();
     }
-    if (event.target.id === "home") {
+    if (event.target.id === "logo") {
       window.location.hash = "";
     }
     if (event.target.id === "schedule") {
@@ -45,17 +45,14 @@ export default class NavBar extends React.Component {
       <header id="header">
         <div id="header-row" className="row">
           <div className="column-one-fourth align-center">
-            <img id="logo" src={TapestryLALogo} alt="TapestryLA-logo" />
+            <img
+              id="logo"
+              src={TapestryLALogo}
+              alt="TapestryLA-logo"
+              onClick={this.handleClick}
+            />
           </div>
           <div className="column-three-fourths align-center justify-end">
-            <a
-              href="/#"
-              id="home"
-              className="header-links flex-nowrap"
-              onClick={this.handleClick}
-            >
-              Home
-            </a>
             <a
               href="/#schedule"
               id="schedule"

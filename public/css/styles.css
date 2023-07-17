@@ -1,5 +1,5 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 #header {
@@ -21,6 +21,11 @@ body {
   filter: brightness(50%);
 }
 
+.home-content,
+.away-content {
+  font-size: 14px;
+}
+
 #schedule-row {
   padding: 1rem;
 }
@@ -28,6 +33,10 @@ body {
 .box,
 .teams-box {
   border: black solid 2px;
+}
+
+#logo {
+  cursor: pointer;
 }
 
 .home-score,
@@ -111,7 +120,7 @@ table {
   font-size: 14px;
   border-radius: 5px;
   margin: 0 0.5rem;
-  padding: 14px;
+  padding: 5px 14px;
   text-align: center;
 }
 

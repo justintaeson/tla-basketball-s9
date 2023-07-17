@@ -221,7 +221,8 @@ td {
 }
 
 .patience {
-  margin-top: 5rem;
+  margin: 5rem auto;
+  text-align: center;
 }
 
 .filter-row {
@@ -244,7 +245,7 @@ td {
   }
 
   .header-links {
-    padding: 0 1rem;
+    padding: 0 0.8rem;
     font-size: 0.8rem;
   }
 
