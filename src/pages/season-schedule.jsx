@@ -1,33 +1,37 @@
-import React from 'react';
-import { createSchedule } from '../functions/helper-schedule';
-import { GameStats } from './game-stats';
+import React from "react";
+import { createSchedule } from "../functions/helper-schedule";
+import { GameStats } from "./game-stats";
 
 export default class Schedule extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      week: '',
+      week: "",
       game: 0,
-      awayTeam: '',
-      homeTeam: '',
-      schedule: []
+      awayTeam: "",
+      homeTeam: "",
+      schedule: [],
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(event) {
-    if (event.target.innerText.includes('Week')) {
+    if (event.target.innerText.includes("W")) {
       this.setState({
-        week: parseInt(event.target.innerText[5])
+        week: parseInt(event.target.innerText[1]),
       });
-    } else if (event.target.innerText.includes('Stats')) {
-      window.location.hash = '#schedule/week' + this.state.week;
+    } else if (event.target.innerText.includes("Stats")) {
+      window.location.hash = "#schedule/week" + this.state.week;
       this.setState({
         week: this.state.week,
         game: event.target.dataset.game,
 
-        awayTeam: event.target.parentNode.previousElementSibling.children[1].children[0].innerText,
-        homeTeam: event.target.parentNode.previousElementSibling.children[0].children[0].innerText
+        awayTeam:
+          event.target.parentNode.previousElementSibling.children[1].children[0]
+            .innerText,
+        homeTeam:
+          event.target.parentNode.previousElementSibling.children[0].children[0]
+            .innerText,
       });
     }
   }
@@ -53,8 +57,12 @@ export default class Schedule extends React.Component {
         secondHalf = weeks.filter((week) => week > 5);
         const filterNumbers = secondHalf.map((week) => {
           return (
-            <p key={week} className="stat-filter week-filter" onClick={this.handleClick}>
-              {'Week ' + week}
+            <p
+              key={week}
+              className="stat-filter week-filter"
+              onClick={this.handleClick}
+            >
+              {"W" + week}
             </p>
           );
         });
@@ -63,8 +71,12 @@ export default class Schedule extends React.Component {
         firstHalf = weeks.filter((week) => week <= 5);
         const filterNumbers = firstHalf.map((week) => {
           return (
-            <p key={week} className="stat-filter week-filter" onClick={this.handleClick}>
-              {'Week ' + week}
+            <p
+              key={week}
+              className="stat-filter week-filter"
+              onClick={this.handleClick}
+            >
+              {"W" + week}
             </p>
           );
         });
@@ -72,9 +84,9 @@ export default class Schedule extends React.Component {
       }
     };
 
-    if (window.location.hash.slice(0, 10) === '#schedule/') {
+    if (window.location.hash.slice(0, 10) === "#schedule/") {
       return <GameStats state={this.state} />;
-    } else if (window.location.hash === '#schedule') {
+    } else if (window.location.hash === "#schedule") {
       const schedule = this.state.schedule.map((games, index) => {
         if (games.week === this.state.week) {
           return (
@@ -82,9 +94,13 @@ export default class Schedule extends React.Component {
               <div key={games.week + games.time} className="schedule-row">
                 <div className="box flex-wrap" onClick={this.handleClick}>
                   <div className="row flex-wrap game-row">
-                    <p className="game-info justify-center">Week {games.week}</p>
+                    <p className="game-info justify-center">
+                      Week {games.week}
+                    </p>
                     <p className="game-info justify-center">{games.date}</p>
-                    <p className="game-info justify-center">{games.time + ' - ' + games.court}</p>
+                    <p className="game-info justify-center">
+                      {games.time + " - " + games.court}
+                    </p>
                   </div>
                   <div className="row">
                     <div className="column-one-half flex-column align-center">
@@ -100,7 +116,8 @@ export default class Schedule extends React.Component {
                     <p
                       className="game-stats justify-center"
                       data-game={index + 1}
-                      onClick={this.handleClick}>
+                      onClick={this.handleClick}
+                    >
                       Stats
                     </p>
                   </div>
@@ -115,8 +132,12 @@ export default class Schedule extends React.Component {
 
       return (
         <>
-          <div className="row stat-filter-row justify-center">{scheduleFilter(1)}</div>
-          <div className="row stat-filter-row justify-center">{scheduleFilter(2)}</div>
+          <div className="row stat-filter-row justify-center">
+            {scheduleFilter(1)}
+          </div>
+          <div className="row stat-filter-row justify-center">
+            {scheduleFilter(2)}
+          </div>
           {schedule}
         </>
       );

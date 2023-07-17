@@ -1,20 +1,20 @@
-import React from 'react';
-import { getPlayerTotals } from '../functions/helper-stats';
+import React from "react";
+import { getPlayerTotals } from "../functions/helper-stats";
 
 export default class Teams extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       team: null,
-      player_totals: []
+      player_totals: [],
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(event) {
-    window.location.hash = '#teams/' + event.target.innerText.toLowerCase();
+    window.location.hash = "#teams/" + event.target.innerText.toLowerCase();
     this.setState({
-      team: event.target.innerText
+      team: event.target.innerText,
     });
   }
 
@@ -33,7 +33,11 @@ export default class Teams extends React.Component {
       .filter((item, index) => index % 10 === 0)
       .map((team) => {
         return (
-          <div key={team.team} className="teams-row justify-center" onClick={this.handleClick}>
+          <div
+            key={team.team}
+            className="teams-row justify-center"
+            onClick={this.handleClick}
+          >
             <div className="teams-box">
               <div className="row justify-center">{team.team}</div>
             </div>
@@ -41,31 +45,30 @@ export default class Teams extends React.Component {
         );
       });
     const playersData = this.state.player_totals.map((player) => {
-      console.log(
-        (player.two_made + player.three_made) / (player.two_attempts + player.three_attempts)
-      );
       const fgPercentage =
-        (player.two_made + player.three_made) / (player.two_attempts + player.three_attempts) >=
+        (player.two_made + player.three_made) /
+          (player.two_attempts + player.three_attempts) >=
           0 && player.games_played > 0
           ? (
               ((player.two_made + player.three_made) /
                 (player.two_attempts + player.three_attempts)) *
               100
-            ).toFixed(2) + '%'
-          : '-';
+            ).toFixed(2) + "%"
+          : "-";
       const threePercentage =
-        player.three_made / player.three_attempts >= 0 && player.games_played > 0
-          ? ((player.three_made / player.three_attempts) * 100).toFixed(2) + '%'
-          : '-';
+        player.three_made / player.three_attempts >= 0 &&
+        player.games_played > 0
+          ? ((player.three_made / player.three_attempts) * 100).toFixed(2) + "%"
+          : "-";
       const ftPercentage =
         player.ft_made / player.ft_attempts >= 0 && player.games_played > 0
-          ? ((player.ft_made / player.ft_attempts) * 100).toFixed(2) + '%'
-          : '-';
+          ? ((player.ft_made / player.ft_attempts) * 100).toFixed(2) + "%"
+          : "-";
 
       const ppg =
         player.points / player.games_played >= 0
           ? (player.points / player.games_played).toFixed(2)
-          : '-';
+          : "-";
       if (player.team === this.state.team) {
         return (
           <tr key={player.name}>
@@ -74,13 +77,13 @@ export default class Teams extends React.Component {
             <td>
               {player.two_made +
                 player.three_made +
-                '/' +
+                "/" +
                 (player.two_attempts + player.three_attempts)}
             </td>
             <td>{fgPercentage}</td>
-            <td>{player.three_made + '/' + player.three_attempts}</td>
+            <td>{player.three_made + "/" + player.three_attempts}</td>
             <td>{threePercentage}</td>
-            <td>{player.ft_made + '/' + player.ft_attempts}</td>
+            <td>{player.ft_made + "/" + player.ft_attempts}</td>
             <td>{ftPercentage}</td>
             <td>{ppg}</td>
           </tr>
@@ -90,7 +93,7 @@ export default class Teams extends React.Component {
       }
     });
 
-    if (this.state.team === null || window.location.hash === '#teams') {
+    if (this.state.team === null || window.location.hash === "#teams") {
       return <div className="team-container">{teams}</div>;
     } else {
       return (

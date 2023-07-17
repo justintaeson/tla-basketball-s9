@@ -1,5 +1,5 @@
-import React from 'react';
-import { createBoxScore, calculateTotals } from '../functions/helper-stats';
+import React from "react";
+import { createBoxScore, calculateTotals } from "../functions/helper-stats";
 
 export class GameStats extends React.Component {
   constructor(props) {
@@ -9,14 +9,13 @@ export class GameStats extends React.Component {
       game: this.props.state.game,
       home_team: this.props.state.homeTeam,
       away_team: this.props.state.awayTeam,
-      box_score: []
+      box_score: [],
     };
   }
 
   componentDidMount() {
     createBoxScore(this.state.week, this.state.game)
       .then((boxScoreData) => {
-        console.log(JSON.stringify(boxScoreData, null, 2));
         this.setState({ box_score: boxScoreData });
       })
       .catch((error) => {
@@ -31,7 +30,7 @@ export class GameStats extends React.Component {
       let team = this.state.home_team;
       let totals = calculateTotals(this.state.box_score)[0];
 
-      if (teamType === 'away') {
+      if (teamType === "away") {
         startIndex = this.state.box_score.length - 10;
         endIndex = this.state.box_score.length;
         team = this.state.away_team;
@@ -92,8 +91,8 @@ export class GameStats extends React.Component {
     };
 
     // Usage example:
-    const homePlayerRows = renderPlayerRows('home');
-    const awayPlayerRows = renderPlayerRows('away');
+    const homePlayerRows = renderPlayerRows("home");
+    const awayPlayerRows = renderPlayerRows("away");
 
     return (
       <>
