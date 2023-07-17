@@ -1,0 +1,305 @@
+body {
+  margin: 0;
+}
+
+.height-vh {
+  height: 100vh;
+}
+
+#header {
+  padding: 0.5rem 0;
+}
+
+#main {
+  height: 100%;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+}
+
+.column-one-half {
+  display: flex;
+  width: 50%;
+  margin: 0;
+}
+
+.column-one-third {
+  display: flex;
+  width: 33.33%;
+  margin: 0;
+  flex-direction: column;
+}
+
+.column-one-fourth {
+  display: flex;
+  width: 25%;
+  margin: auto;
+}
+
+.column-three-fourths {
+  display: flex;
+  width: 75%;
+  margin: auto;
+}
+
+.overlay-hidden {
+  overlay: hidden;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.header-links {
+  padding: 0 2rem;
+}
+
+#logo {
+  height: 3rem;
+  margin-left: 2rem;
+}
+
+.justify-end {
+  justify-content: end;
+}
+
+#video-row {
+  position: relative;
+  overflow: hidden;
+}
+
+#about-video {
+  object-fit: cover;
+  height: calc(100vh - 64px);
+  width: 100%;
+}
+
+.home-text {
+  position: absolute;
+  color: yellow;
+}
+
+#tapestry-la {
+  top: 30%;
+}
+
+#basketball-league {
+  top: 40%;
+}
+
+#season-8 {
+  top: 50%;
+}
+
+#update-text {
+  top: 60%;
+}
+
+.box {
+  width: 50%;
+  display: flex;
+  margin: 2rem;
+  padding: 2rem 4rem;
+}
+
+.schedule-row {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.game-info {
+  display: flex;
+  width: 100%;
+  margin: auto;
+  font-size: 14px;
+}
+
+.home-content,
+.home-score,
+.away-content,
+.away-score {
+  margin: 1rem 0;
+}
+
+.teams-box {
+  width: 30%;
+  display: flex;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.teams-row {
+  display: flex;
+}
+
+table {
+  margin: 2rem auto;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: center;
+  padding: 0.5rem 1rem;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+.game-stats {
+  display: flex;
+  width: 10rem;
+  margin: auto;
+  padding: 0.5rem 0;
+  align-items: center;
+}
+
+#home-button,
+#away-button {
+  padding: 0.5rem 2rem;
+}
+
+.teams-table {
+  margin-top: 2rem;
+}
+
+.stat-type {
+  display: flex;
+  justify-content: center;
+}
+
+.stats-container {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#stat-type-team,
+#stat-type-player {
+  padding: 1rem 0;
+}
+
+#home-button-container {
+  justify-content: right;
+  margin-right: 1rem;
+}
+
+#away-button-container {
+  justify-content: left;
+  margin-left: 1rem;
+}
+
+.stats-header {
+  margin: auto;
+  padding-top: 2rem;
+}
+
+.player-stat-header {
+  text-align: center;
+}
+
+.stat-filter {
+  padding: 0 0.5rem;
+}
+
+.patience {
+  margin-top: 5rem;
+}
+
+.filter-row {
+  display: inline-flex;
+}
+
+@media screen and (max-width: 768px) {
+  .column-one-half {
+    max-width: 50%;
+  }
+
+  th,
+  td {
+    padding: 0.5rem;
+  }
+
+  .stat-heading,
+  td {
+    font-size: 0.4rem;
+  }
+
+  .header-links {
+    padding: 0 1rem;
+    font-size: 0.8rem;
+  }
+
+  .box {
+    width: 100%;
+    display: flex;
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  #logo {
+    padding-right: 1rem;
+  }
+
+  .stats-container {
+    height: auto;
+  }
+
+  .stat-filter {
+    margin: 1rem;
+  }
+
+  .teams-row {
+    margin: auto;
+  }
+
+  #tapestry-la {
+    top: 20%;
+  }
+
+  #basketball-league {
+    top: 30%;
+  }
+
+  #season-8 {
+    top: 40%;
+  }
+
+  #update-text {
+    top: 50%;
+  }
+
+  .team-container {
+    display: inline-grid;
+    grid-template-columns: 50vw 50vw;
+    grid-template-rows: auto;
+    padding-top: 2rem;
+  }
+
+  .teams-box {
+    text-align: center;
+    padding: 1rem 2rem;
+  }
+
+  .teams-table {
+    margin-top: 0;
+  }
+}

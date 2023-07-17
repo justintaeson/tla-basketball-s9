@@ -1,0 +1,167 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+#header {
+  background-color: black;
+  color: white;
+}
+
+.header-links {
+  color: white;
+  text-decoration: none;
+}
+
+.header-links:hover {
+  cursor: pointer;
+  color: orange;
+}
+
+#about-video {
+  filter: brightness(50%);
+}
+
+#schedule-row {
+  padding: 1rem;
+}
+
+.box,
+.teams-box {
+  border: black solid 2px;
+}
+
+.home-score,
+.away-score {
+  font-size: 3rem;
+}
+
+.teams-box:hover {
+  cursor: pointer;
+  background-color: yellow;
+}
+
+th {
+  background-color: gray;
+  color: white;
+}
+
+table {
+  font-size: 0.8rem;
+}
+
+.game-stats {
+  border-radius: 5px;
+  border: 2px solid black;
+}
+
+.player-points,
+.team-wins {
+  background-color: lightgoldenrodyellow;
+  font-weight: 700;
+}
+
+.game-stats:hover,
+#home-button:hover,
+#away-button:hover,
+.stat-type:hover,
+.player-stat-header:hover {
+  cursor: pointer;
+  background-color: yellow;
+}
+
+#home-button,
+#away-button {
+  font-size: 1.5rem;
+  border-radius: 5rem;
+  border: 2px solid black;
+}
+
+.stat-type {
+  border: 2px solid black;
+  padding: 5rem 8rem;
+  width: 5rem;
+  font-size: 3rem;
+}
+
+.player-stat-header {
+  border: 2px solid black;
+  padding: 0 2rem;
+  margin: 2rem;
+  border-radius: 2rem;
+}
+
+.yellow {
+  background-color: yellow;
+}
+.stat-filter {
+  font-size: 1rem;
+}
+
+.stat-filter:hover {
+  background-color: yellow;
+  cursor: pointer;
+}
+
+.underline {
+  text-decoration: underline 2px;
+}
+
+.week-filter {
+  border: 2px solid;
+  font-size: 14px;
+  border-radius: 5px;
+  margin: 0 0.5rem;
+  padding: 14px;
+  text-align: center;
+}
+
+.stat-filter-row {
+  margin-top: 1rem;
+}
+
+.team-stat-filter {
+  border: 2px solid black;
+  border-radius: 5rem;
+  margin: 2rem 1rem;
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.totals-row {
+  background-color: orange;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+.team-name {
+  font-size: 1rem;
+  margin: 1rem;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 768px) {
+  .stats-header {
+    font-size: 16px;
+    padding: 1rem 0;
+  }
+
+  .player-stats-header {
+    font-size: 10px;
+  }
+
+  .stat-filter {
+    font-size: 1rem;
+  }
+
+  .week-filter {
+    font-size: 0.5rem;
+    margin: 0.5rem;
+  }
+
+  #home-button,
+  #away-button {
+    font-size: 1rem;
+  }
+}
