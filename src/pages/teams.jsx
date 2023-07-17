@@ -12,6 +12,7 @@ export default class Teams extends React.Component {
   }
 
   handleClick(event) {
+    console.log(event.target.innerText);
     window.location.hash = "#teams/" + event.target.innerText.toLowerCase();
     this.setState({
       team: event.target.innerText,
@@ -39,7 +40,7 @@ export default class Teams extends React.Component {
             onClick={this.handleClick}
           >
             <div className="teams-box">
-              <div className="row justify-center">{team.team}</div>
+              <div className="row justify-center touch-target">{team.team}</div>
             </div>
           </div>
         );

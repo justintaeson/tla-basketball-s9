@@ -128,6 +128,10 @@ body {
   font-size: 14px;
 }
 
+.touch-target {
+  font-size: large;
+}
+
 .home-content,
 .home-score,
 .away-content,

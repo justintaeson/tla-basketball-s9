@@ -1,30 +1,29 @@
-import React from 'react';
-import Home from './pages/home';
-import NavBar from './navbar';
-import Schedule from './pages/season-schedule';
-import Teams from './pages/teams';
-import Stats from './pages/stats';
+import React from "react";
+import Home from "./pages/home";
+import NavBar from "./navbar";
+import Schedule from "./pages/season-schedule";
+import Teams from "./pages/teams";
+import Stats from "./pages/stats";
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hash: window.location.hash
+      hash: window.location.hash,
     };
   }
 
   componentDidMount() {
-    console.log(window.location.hash);
-    window.addEventListener('hashchange', () => {
+    window.addEventListener("hashchange", () => {
       this.setState({
-        hash: window.location.hash
+        hash: window.location.hash,
       });
     });
   }
 
   render() {
     const { hash } = this.state;
-    if (hash === '' || hash === '#') {
+    if (hash === "" || hash === "#") {
       window.onbeforeunload = function () {
         window.scrollTo(0, 0);
       };
@@ -35,7 +34,7 @@ export default class App extends React.Component {
         </>
       );
     }
-    if (hash === '#schedule' || hash.slice(0, 10) === '#schedule/') {
+    if (hash === "#schedule" || hash.slice(0, 10) === "#schedule/") {
       window.onbeforeunload = function () {
         window.scrollTo(0, 0);
       };
@@ -46,7 +45,7 @@ export default class App extends React.Component {
         </>
       );
     }
-    if (hash === '#teams' || hash.slice(0, 7) === '#teams/') {
+    if (hash === "#teams" || hash.slice(0, 7) === "#teams/") {
       window.onbeforeunload = function () {
         window.scrollTo(0, 0);
       };
@@ -57,7 +56,7 @@ export default class App extends React.Component {
         </>
       );
     }
-    if (hash === '#stats' || hash.slice(0, 7) === '#stats/') {
+    if (hash === "#stats" || hash.slice(0, 7) === "#stats/") {
       return (
         <>
           <NavBar />
