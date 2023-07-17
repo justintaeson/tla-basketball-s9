@@ -1,5 +1,5 @@
-import React from 'react';
-import BasketballStockFootage from '../assets/tapestry_basketball_2022.mp4';
+import React from "react";
+import BasketballStockFootage from "../assets/tapestry_basketball_2022.mp4";
 
 export default class Home extends React.Component {
   render() {
@@ -18,7 +18,6 @@ export default class Home extends React.Component {
           <h1 id="season-8" className="home-text">
             Season 9
           </h1>
-          <h3 id="update-text" className="home-text"></h3>
         </div>
       </main>
     );
