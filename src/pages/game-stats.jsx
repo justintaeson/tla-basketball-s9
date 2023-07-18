@@ -25,6 +25,7 @@ export class GameStats extends React.Component {
   }
 
   render() {
+    console.log(this.state);
     const renderPlayerRows = (teamType) => {
       let startIndex = 0;
       let endIndex = 10;

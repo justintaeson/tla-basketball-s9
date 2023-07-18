@@ -3,6 +3,7 @@ const SHEET_TITLE =
   "TLA Basketball - 2023 League - Season 9 - Scores and Stats (DK)";
 
 export const createBoxScore = async (week, game) => {
+  console.log(week, game);
   const SHEET_RANGE = "W" + week + "G" + game + "!A4:U50";
   const FULL_URL =
     "https://docs.google.com/spreadsheets/d/" +

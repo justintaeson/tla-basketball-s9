@@ -97,7 +97,8 @@ export default class Schedule extends React.Component {
       let gameID = 0;
 
       const schedule = this.state.schedule.map((games, index) => {
-        gameID > 4 ? (gameID = 0) : gameID++;
+        gameID > 3 ? (gameID = 1) : (gameID = gameID + 1);
+        console.log(gameID);
 
         if (games.week === this.state.week) {
           if (games.awayTeam === "Open Gym") {
