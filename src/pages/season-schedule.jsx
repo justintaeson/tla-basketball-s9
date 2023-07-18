@@ -35,6 +35,8 @@ export default class Schedule extends React.Component {
             .innerText,
       });
     }
+
+    return null;
   }
 
   componentDidMount() {
@@ -48,6 +50,7 @@ export default class Schedule extends React.Component {
   }
 
   render() {
+    console.log(this.state.schedule);
     if (this.state.isLoading) {
       return <div className="loader"></div>;
     }
@@ -96,10 +99,35 @@ export default class Schedule extends React.Component {
         let gameID = 0;
         gameID > 4 ? (gameID = 0) : gameID++;
         if (games.week === this.state.week) {
+          if (games.awayTeam === "Open Gym") {
+            return (
+              <>
+                <div key={games.week + games.time} className="schedule-row">
+                  <div className="box flex-wrap">
+                    <div className="row flex-wrap game-row">
+                      <p className="game-info justify-center">
+                        Week {games.week}
+                      </p>
+                      <p className="game-info justify-center">{games.date}</p>
+                      <p className="game-info justify-center">
+                        {games.time + " - " + games.court}
+                      </p>
+                    </div>
+                    <div className="row justify-center">
+                      <div className="column-one-half flex-column align-center">
+                        <p className="away-content">{games.awayTeam}</p>
+                      </div>
+                    </div>
+                    <div className="row flex-wrap game-row"></div>
+                  </div>
+                </div>
+              </>
+            );
+          }
           return (
             <>
               <div key={games.week + games.time} className="schedule-row">
-                <div className="box flex-wrap" onClick={this.handleClick}>
+                <div className="box flex-wrap">
                   <div className="row flex-wrap game-row">
                     <p className="game-info justify-center">
                       Week {games.week}
