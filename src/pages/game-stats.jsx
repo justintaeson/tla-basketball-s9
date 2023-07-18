@@ -10,13 +10,14 @@ export class GameStats extends React.Component {
       home_team: this.props.state.homeTeam,
       away_team: this.props.state.awayTeam,
       box_score: [],
+      isLoading: true,
     };
   }
 
   componentDidMount() {
     createBoxScore(this.state.week, this.state.game)
       .then((boxScoreData) => {
-        this.setState({ box_score: boxScoreData });
+        this.setState({ box_score: boxScoreData, isLoading: false });
       })
       .catch((error) => {
         console.error(error);
@@ -29,6 +30,10 @@ export class GameStats extends React.Component {
       let endIndex = 10;
       let team = this.state.home_team;
       let totals = calculateTotals(this.state.box_score)[0];
+
+      if (this.state.isLoading) {
+        return <div className="loader"></div>;
+      }
 
       if (teamType === "away") {
         startIndex = this.state.box_score.length - 10;
@@ -44,13 +49,10 @@ export class GameStats extends React.Component {
             <tr>
               <th className="stat-heading">Player</th>
               <th className="stat-heading">FG</th>
-              <th className="stat-heading">FGA</th>
               <th className="stat-heading">FG%</th>
               <th className="stat-heading">3P</th>
-              <th className="stat-heading">3PA</th>
               <th className="stat-heading">3P%</th>
               <th className="stat-heading">FT</th>
-              <th className="stat-heading">FTA</th>
               <th className="stat-heading">FT%</th>
               <th className="stat-heading">PF</th>
               <th className="stat-heading">PTS</th>
@@ -58,14 +60,11 @@ export class GameStats extends React.Component {
             {this.state.box_score.slice(startIndex, endIndex).map((player) => (
               <tr key={player.name}>
                 <td>{player.name}</td>
-                <td>{player.fg_made}</td>
-                <td>{player.fg_attempts}</td>
+                <td>{player.fg_made + "/" + player.fg_attempts}</td>
                 <td>{player.fg_percentage}</td>
-                <td>{player.three_made}</td>
-                <td>{player.three_attempts}</td>
+                <td>{player.three_made + "/" + player.three_attempts}</td>
                 <td>{player.three_percentage}</td>
-                <td>{player.ft_made}</td>
-                <td>{player.ft_attempts}</td>
+                <td>{player.ft_made + "/" + player.ft_attempts}</td>
                 <td>{player.ft_percentage}</td>
                 <td>{player.fouls}</td>
                 <td>{player.points}</td>
@@ -73,14 +72,11 @@ export class GameStats extends React.Component {
             ))}
             <tr className="totals-row">
               <td>{totals.name}</td>
-              <td>{totals.fg_made}</td>
-              <td>{totals.fg_attempts}</td>
+              <td>{totals.fg_made + "/" + totals.fg_attempts}</td>
               <td>{totals.fg_percentage}</td>
-              <td>{totals.three_made}</td>
-              <td>{totals.three_attempts}</td>
+              <td>{totals.three_made + "/" + totals.three_attempts}</td>
               <td>{totals.three_percentage}</td>
-              <td>{totals.ft_made}</td>
-              <td>{totals.ft_attempts}</td>
+              <td>{totals.ft_made + "/" + totals.ft_attempts}</td>
               <td>{totals.ft_percentage}</td>
               <td>{totals.fouls}</td>
               <td>{totals.points}</td>

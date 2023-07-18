@@ -1,34 +1,50 @@
-import React from 'react';
-import TeamStatsFilter from './team-stat-filter';
+import React from "react";
+import TeamStatsFilter from "./team-stat-filter";
 
 export default class TeamStats extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: 'general'
+      page: "general",
+      isLoading: true,
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(event) {
     this.setState({
-      page: event.target.innerText
+      page: event.target.innerText,
     });
   }
 
+  componentDidMount() {}
+
   render() {
+    if (this.state.isLoading) {
+      return <div className="loader"></div>;
+    }
+
     const data = () => {
-      if (this.state.page === 'general') {
+      if (this.state.page === "general") {
         return (
           <>
             <div className="row justify-center">
-              <p className="stat-filter team-stat-filter yellow" onClick={this.handleClick}>
+              <p
+                className="stat-filter team-stat-filter yellow"
+                onClick={this.handleClick}
+              >
                 general
               </p>
-              <p className="stat-filter team-stat-filter" onClick={this.handleClick}>
+              <p
+                className="stat-filter team-stat-filter"
+                onClick={this.handleClick}
+              >
                 offense
               </p>
-              <p className="stat-filter team-stat-filter" onClick={this.handleClick}>
+              <p
+                className="stat-filter team-stat-filter"
+                onClick={this.handleClick}
+              >
                 defense
               </p>
             </div>
@@ -50,17 +66,26 @@ export default class TeamStats extends React.Component {
         );
       }
 
-      if (this.state.page === 'offense') {
+      if (this.state.page === "offense") {
         return (
           <>
             <div className="row justify-center">
-              <p className="stat-filter team-stat-filter" onClick={this.handleClick}>
+              <p
+                className="stat-filter team-stat-filter"
+                onClick={this.handleClick}
+              >
                 general
               </p>
-              <p className="stat-filter team-stat-filter yellow" onClick={this.handleClick}>
+              <p
+                className="stat-filter team-stat-filter yellow"
+                onClick={this.handleClick}
+              >
                 offense
               </p>
-              <p className="stat-filter team-stat-filter" onClick={this.handleClick}>
+              <p
+                className="stat-filter team-stat-filter"
+                onClick={this.handleClick}
+              >
                 defense
               </p>
             </div>
@@ -83,17 +108,26 @@ export default class TeamStats extends React.Component {
         );
       }
 
-      if (this.state.page === 'defense') {
+      if (this.state.page === "defense") {
         return (
           <>
             <div className="row justify-center">
-              <p className="stat-filter team-stat-filter" onClick={this.handleClick}>
+              <p
+                className="stat-filter team-stat-filter"
+                onClick={this.handleClick}
+              >
                 general
               </p>
-              <p className="stat-filter team-stat-filter" onClick={this.handleClick}>
+              <p
+                className="stat-filter team-stat-filter"
+                onClick={this.handleClick}
+              >
                 offense
               </p>
-              <p className="stat-filter team-stat-filter yellow" onClick={this.handleClick}>
+              <p
+                className="stat-filter team-stat-filter yellow"
+                onClick={this.handleClick}
+              >
                 defense
               </p>
             </div>

@@ -1,13 +1,14 @@
-const SHEET_ID = '11R6D2gHsdNN6fMpXCITRrQg7DmUhhmzHCiMBOVQmMUU';
-const SHEET_TITLE = 'TLA Basketball - 2023 League - Season 9 - Scores and Stats (DK)';
-const SHEET_RANGE = 'Schedule!A3:I37';
+const SHEET_ID = "11R6D2gHsdNN6fMpXCITRrQg7DmUhhmzHCiMBOVQmMUU";
+const SHEET_TITLE =
+  "TLA Basketball - 2023 League - Season 9 - Scores and Stats (DK)";
+const SHEET_RANGE = "Schedule!A3:S37";
 
 const FULL_URL =
-  'https://docs.google.com/spreadsheets/d/' +
+  "https://docs.google.com/spreadsheets/d/" +
   SHEET_ID +
-  '/gviz/tq?sheet=' +
+  "/gviz/tq?sheet=" +
   SHEET_TITLE +
-  '&range=' +
+  "&range=" +
   SHEET_RANGE;
 
 export const createSchedule = async () => {
@@ -21,8 +22,8 @@ export const createSchedule = async () => {
     const time = row.c[2].v;
     const court = row.c[3].v;
     const homeTeam = row.c[4].v;
-    const homeScore = row.c[5]?.v || '-';
-    const awayScore = row.c[6]?.v || '-';
+    const homeScore = row.c[5]?.v || "-";
+    const awayScore = row.c[6]?.v || "-";
     const awayTeam = row.c[7].v;
     const game = row.c[8].v;
 
@@ -35,7 +36,7 @@ export const createSchedule = async () => {
       homeScore,
       awayScore,
       awayTeam,
-      game
+      game,
     };
   });
 };

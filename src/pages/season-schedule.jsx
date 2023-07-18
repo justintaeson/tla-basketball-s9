@@ -11,6 +11,7 @@ export default class Schedule extends React.Component {
       awayTeam: "",
       homeTeam: "",
       schedule: [],
+      isLoading: true,
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -39,7 +40,7 @@ export default class Schedule extends React.Component {
   componentDidMount() {
     createSchedule()
       .then((scheduleData) => {
-        this.setState({ week: 1, schedule: scheduleData });
+        this.setState({ week: 1, schedule: scheduleData, isLoading: false });
       })
       .catch((error) => {
         console.error(error);
@@ -47,6 +48,10 @@ export default class Schedule extends React.Component {
   }
 
   render() {
+    if (this.state.isLoading) {
+      return <div className="loader"></div>;
+    }
+
     const weeks = this.state.schedule
       .map((game) => game.week)
       .filter((value, index, self) => self.indexOf(value) === index);
@@ -88,6 +93,8 @@ export default class Schedule extends React.Component {
       return <GameStats state={this.state} />;
     } else if (window.location.hash === "#schedule") {
       const schedule = this.state.schedule.map((games, index) => {
+        let gameID = 0;
+        gameID > 4 ? (gameID = 0) : gameID++;
         if (games.week === this.state.week) {
           return (
             <>
@@ -115,7 +122,7 @@ export default class Schedule extends React.Component {
                   <div className="row flex-wrap game-row">
                     <p
                       className="game-stats justify-center"
-                      data-game={index + 1}
+                      data-game={gameID}
                       onClick={this.handleClick}
                     >
                       Stats

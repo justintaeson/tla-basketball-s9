@@ -130,6 +130,7 @@ body {
 
 .touch-target {
   font-size: large;
+  padding: 2rem;
 }
 
 .home-content,
@@ -143,7 +144,6 @@ body {
   width: 30%;
   display: flex;
   margin: 1rem;
-  padding: 1rem;
 }
 
 .teams-row {
@@ -187,6 +187,7 @@ td {
 .stat-type {
   display: flex;
   justify-content: center;
+  text-align: center;
 }
 
 .stats-container {

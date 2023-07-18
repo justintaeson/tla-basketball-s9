@@ -29,19 +29,27 @@ export default class Stats extends React.Component {
   }
 
   render() {
-    // if (this.state.statType === 'Team') {
+    // if (this.state.statType === "Team") {
     //   return <TeamStats />;
     // }
-    // if (this.state.statType === 'Player') {
+    // if (this.state.statType === "Player") {
     //   return <PlayerStats />;
     // }
     // return (
     //   <div className="stats-container">
-    //     <div id="stat-type-team" className="row justify-center" onClick={this.handleClick}>
-    //       <div className="stat-type">Team</div>
+    //     <div
+    //       id="stat-type-team"
+    //       className="row justify-center"
+    //       onClick={this.handleClick}
+    //     >
+    //       <div className="stat-type">Team Stats</div>
     //     </div>
-    //     <div id="stat-type-player" className="row justify-center" onClick={this.handleClick}>
-    //       <div className="stat-type">Player</div>
+    //     <div
+    //       id="stat-type-player"
+    //       className="row justify-center"
+    //       onClick={this.handleClick}
+    //     >
+    //       <div className="stat-type">Player Stats</div>
     //     </div>
     //   </div>
     // );

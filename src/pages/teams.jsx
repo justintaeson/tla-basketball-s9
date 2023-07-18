@@ -7,6 +7,7 @@ export default class Teams extends React.Component {
     this.state = {
       team: null,
       player_totals: [],
+      isLoading: true,
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -22,7 +23,7 @@ export default class Teams extends React.Component {
   componentDidMount() {
     getPlayerTotals()
       .then((playerTotalsData) => {
-        this.setState({ player_totals: playerTotalsData });
+        this.setState({ player_totals: playerTotalsData, isLoading: false });
       })
       .catch((error) => {
         console.error(error);
@@ -30,6 +31,9 @@ export default class Teams extends React.Component {
   }
 
   render() {
+    if (this.state.isLoading) {
+      return <div className="loader"></div>;
+    }
     const teams = this.state.player_totals
       .filter((item, index) => index % 10 === 0)
       .map((team) => {
