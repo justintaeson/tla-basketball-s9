@@ -104,7 +104,7 @@ export default class Schedule extends React.Component {
             return (
               <>
                 <div key={games.week + games.time} className="schedule-row">
-                  <div className="box flex-wrap" onClick={this.handleClick}>
+                  <div className="box flex-wrap">
                     <div className="row flex-wrap game-row">
                       <p className="game-info justify-center">
                         Week {games.week}
