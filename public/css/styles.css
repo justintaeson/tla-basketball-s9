@@ -155,7 +155,7 @@ table {
   height: 80px;
   position: absolute;
   top: 50%;
-  left: 55%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 
@@ -201,5 +201,15 @@ table {
   #home-button,
   #away-button {
     font-size: 1rem;
+  }
+
+  .loader {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
   }
 }
