@@ -12,11 +12,9 @@ export const createBoxScore = async (week, game) => {
     "&range=" +
     SHEET_RANGE;
 
-  console.log(FULL_URL);
   const res = await fetch(FULL_URL);
   const rep = await res.text();
   const data = JSON.parse(rep.substring(47, rep.length - 2));
-  console.log(data);
   const boxScore = data.table.rows
     .filter((row) => row.c[1]?.v && row.c[1]?.v !== "Name")
     .map((array) => {
@@ -131,13 +129,4 @@ export const getPlayerTotals = async () => {
   return playerTotals;
 };
 
-export const getTeamTotals = async () => {
-  const SHEET_RANGE = "Player Total Stats!A1:J101";
-  const FULL_URL =
-    "https://docs.google.com/spreadsheets/d/" +
-    SHEET_ID +
-    "/gviz/tq?sheet=" +
-    SHEET_TITLE +
-    "&range=" +
-    SHEET_RANGE;
-};
+export const getTeamTotals = async () => {};
