@@ -50,7 +50,6 @@ export default class Schedule extends React.Component {
   }
 
   render() {
-    console.log(this.state.schedule);
     if (this.state.isLoading) {
       return <div className="loader"></div>;
     }
@@ -95,15 +94,17 @@ export default class Schedule extends React.Component {
     if (window.location.hash.slice(0, 10) === "#schedule/") {
       return <GameStats state={this.state} />;
     } else if (window.location.hash === "#schedule") {
+      let gameID = 0;
+
       const schedule = this.state.schedule.map((games, index) => {
-        let gameID = 0;
         gameID > 4 ? (gameID = 0) : gameID++;
+
         if (games.week === this.state.week) {
           if (games.awayTeam === "Open Gym") {
             return (
               <>
                 <div key={games.week + games.time} className="schedule-row">
-                  <div className="box flex-wrap">
+                  <div className="box flex-wrap" onClick={this.handleClick}>
                     <div className="row flex-wrap game-row">
                       <p className="game-info justify-center">
                         Week {games.week}

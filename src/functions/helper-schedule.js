@@ -15,7 +15,6 @@ export const createSchedule = async () => {
   const res = await fetch(FULL_URL);
   const rep = await res.text();
   const data = JSON.parse(rep.substring(47, rep.length - 2));
-  console.log(data);
 
   return data.table.rows.map((row) => {
     const week = row.c[0].v;
@@ -26,19 +25,7 @@ export const createSchedule = async () => {
     const homeScore = row.c[5]?.v || "-";
     const awayScore = row.c[6]?.v || "-";
     const awayTeam = row.c[7].v;
-    const game = row.c[8]?.v;
-
-    console.log({
-      week,
-      date,
-      time,
-      court,
-      homeTeam,
-      homeScore,
-      awayScore,
-      awayTeam,
-      game,
-    });
+    const game = row.c[8].v || "-";
 
     return {
       week,
