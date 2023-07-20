@@ -13,7 +13,6 @@ export default class Teams extends React.Component {
   }
 
   handleClick(event) {
-    console.log(event.target.innerText);
     window.location.hash = "#teams/" + event.target.innerText.toLowerCase();
     this.setState({
       team: event.target.innerText,
@@ -34,6 +33,7 @@ export default class Teams extends React.Component {
     if (this.state.isLoading) {
       return <div className="loader"></div>;
     }
+
     const teams = this.state.player_totals
       .filter((item, index) => index % 10 === 0)
       .map((team) => {
@@ -49,6 +49,7 @@ export default class Teams extends React.Component {
           </div>
         );
       });
+
     const playersData = this.state.player_totals.map((player) => {
       const fgPercentage =
         (player.two_made + player.three_made) /
@@ -98,6 +99,66 @@ export default class Teams extends React.Component {
       }
     });
 
+    const teamTotals = (playersData, team) => {
+      let total = playersData
+        .filter((playerTotal) => playerTotal.team === team)
+        .reduce(
+          (acc, player) => {
+            acc.games_played = Math.max(acc.games_played, player.games_played);
+            acc.two_made += player.two_made;
+            acc.two_attempts += player.two_attempts;
+            acc.three_made += player.three_made;
+            acc.three_attempts += player.three_attempts;
+            acc.ft_made += player.ft_made;
+            acc.ft_attempts += player.ft_attempts;
+            acc.points += player.points;
+            return acc;
+          },
+          {
+            games_played: 0,
+            two_made: 0,
+            two_attempts: 0,
+            three_made: 0,
+            three_attempts: 0,
+            ft_made: 0,
+            ft_attempts: 0,
+            points: 0,
+          }
+        );
+
+      let fg =
+        total.two_made +
+        total.three_made +
+        "/" +
+        (total.two_attempts + total.three_attempts);
+      let fg_percentage =
+        (
+          ((total.two_made + total.three_made) /
+            (total.two_attempts + total.three_attempts)) *
+          100
+        ).toFixed(2) + "%";
+
+      let three_percentage =
+        ((total.three_made / total.three_attempts) * 100).toFixed(2) + "%";
+      let ft_percentage =
+        ((total.ft_made / total.ft_attempts) * 100).toFixed(2) + "%";
+      let ppg = (total.points / total.games_played).toFixed(2);
+
+      return (
+        <tr className="totals-row">
+          <td>Total</td>
+          <td>{total.games_played}</td>
+          <td>{fg}</td>
+          <td>{fg_percentage}</td>
+          <td>{total.three_made + "/" + total.three_attempts}</td>
+          <td>{three_percentage}</td>
+          <td>{total.ft_made + "/" + total.ft_attempts}</td>
+          <td>{ft_percentage}</td>
+          <td>{ppg}</td>
+        </tr>
+      );
+    };
+
     if (this.state.team === null || window.location.hash === "#teams") {
       return <div className="team-container">{teams}</div>;
     } else {
@@ -120,6 +181,7 @@ export default class Teams extends React.Component {
                 <th className="stat-heading">PPG</th>
               </tr>
               {playersData}
+              {teamTotals(this.state.player_totals, this.state.team)}
             </tbody>
           </table>
         </>
