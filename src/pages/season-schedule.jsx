@@ -42,7 +42,7 @@ export default class Schedule extends React.Component {
   componentDidMount() {
     createSchedule()
       .then((scheduleData) => {
-        this.setState({ week: 1, schedule: scheduleData, isLoading: false });
+        this.setState({ week: 2, schedule: scheduleData, isLoading: false });
       })
       .catch((error) => {
         console.error(error);
