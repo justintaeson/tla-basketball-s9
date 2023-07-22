@@ -12,7 +12,6 @@ export default class NavBar extends React.Component {
 
   handleClick(event) {
     if (window.location.hash === "#" + event.target.id) {
-      window.location.reload();
     }
     if (event.target.id === "logo") {
       window.location.hash = "";
@@ -25,7 +24,6 @@ export default class NavBar extends React.Component {
     }
     if (event.target.id === "stats") {
       window.location.hash = "stats";
-      window.location.reload();
     }
   }
 
