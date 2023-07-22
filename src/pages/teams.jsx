@@ -51,16 +51,16 @@ export default class Teams extends React.Component {
       });
 
     const playersData = this.state.player_totals.map((player) => {
-      const fgPercentage =
+      let fgPercentage = !isNaN(
         (player.two_made + player.three_made) /
-          (player.two_attempts + player.three_attempts) >=
-          0 && player.games_played > 0
-          ? (
-              ((player.two_made + player.three_made) /
-                (player.two_attempts + player.three_attempts)) *
-              100
-            ).toFixed(1) + "%"
-          : "-";
+          (player.two_attempts + player.three_attempts)
+      )
+        ? (
+            ((player.two_made + player.three_made) /
+              (player.two_attempts + player.three_attempts)) *
+            100
+          ).toFixed(1) + "%"
+        : "-";
       const threePercentage =
         player.three_made / player.three_attempts >= 0 &&
         player.games_played > 0
