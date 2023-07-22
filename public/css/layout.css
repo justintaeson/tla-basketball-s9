@@ -162,7 +162,7 @@ table {
 th,
 td {
   text-align: center;
-  padding: 0.4rem;
+  padding: 0.8rem;
 }
 
 table,
@@ -250,7 +250,7 @@ td {
 
   th,
   td {
-    padding: 0.5rem;
+    padding: 0.4rem;
   }
 
   .stat-heading,
@@ -304,7 +304,6 @@ td {
 
   .teams-box {
     text-align: center;
-    padding: 1rem 2rem;
   }
 
   .teams-table {
