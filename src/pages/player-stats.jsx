@@ -78,7 +78,6 @@ export default class PlayerStats extends React.Component {
           : "-";
         return (
           <tr>
-            <td className="player-stats">{index + 1}</td>
             <td className="player-stats">{player.name}</td>
             <td className="player-stats">{player.team}</td>
             <td className="player-stats">{player.games_played}</td>
@@ -107,7 +106,6 @@ export default class PlayerStats extends React.Component {
           <caption className="team-name">Players</caption>
           <tbody>
             <tr>
-              <th className="player-stats-header player-stats">Rank</th>
               <th className="player-stats-header player-stats">Player</th>
               <th className="player-stats-header player-stats">Team</th>
               <th className="player-stats-header player-stats">GP</th>
