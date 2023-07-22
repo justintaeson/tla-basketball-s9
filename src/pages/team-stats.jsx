@@ -20,7 +20,6 @@ export default class TeamStats extends React.Component {
   componentDidMount() {
     getTeamTotals()
       .then((teamStatsData) => {
-        console.log(JSON.stringify(teamStatsData, null, 2));
         this.setState({ team_stats: teamStatsData, isLoading: false });
       })
       .catch((error) => {

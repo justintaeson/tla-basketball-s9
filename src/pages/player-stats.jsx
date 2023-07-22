@@ -20,7 +20,6 @@ export default class PlayerStats extends React.Component {
   componentDidMount() {
     getPlayerTotals()
       .then((playerTotalsData) => {
-        console.log(playerTotalsData);
         let sorted_player_totals = playerTotalsData
           .map((player) => ({
             ...player,
