@@ -1,100 +1,112 @@
-// import React from 'react';
-// import { createOrderedArray, getSum, formatStats, gamesPlayed } from '../data/players';
-// import { teams } from '../data/teams';
+import React from "react";
 
-// export default class PlayerStats extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       page: '1'
-//     };
-//     this.handleClick = this.handleClick.bind(this);
-//   }
+import { getPlayerTotals } from "../functions/helper-stats";
+export default class PlayerStats extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      page: 1,
+      isLoading: true,
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-//   handleClick(event) {
-//     this.setState({
-//       page: event.target.innerText
-//     });
-//   }
+  handleClick(event) {
+    this.setState({
+      page: event.target.innerText,
+    });
+  }
 
-//   render() {
-//     const orderedArray = createOrderedArray();
-//     const tableContent = orderedArray.map((player) => {
-//       const currentIndex = orderedArray.indexOf(player);
-//       if (currentIndex >= this.state.page * 10 - 10 && currentIndex < this.state.page * 10) {
-//         return (
-//           <tr key={player.name}>
-//             <td>{orderedArray.indexOf(player) + 1}</td>
-//             <td>{player.name}</td>
-//             <td>{player.team}</td>
-//             <td>{gamesPlayed(player.twoMakes)}</td>
-//             <td className="player-points">
-//               {formatStats(getSum(player.points) / gamesPlayed(player.points)).slice(0, 4)}
-//             </td>
-//             <td>
-//               {getSum(player.twoMakes) +
-//                 getSum(player.threeMakes) +
-//                 '/' +
-//                 (getSum(player.twoAttempts) + getSum(player.threeAttempts))}
-//             </td>
+  componentDidMount() {
+    getPlayerTotals()
+      .then((playerTotalsData) => {
+        let sorted_player_totals = playerTotalsData
+          .map((player) => ({
+            ...player,
+            ppg: player.games_played ? player.points / player.games_played : 0,
+          }))
+          .sort((a, b) => b.ppg - a.ppg);
 
-//             <td>
-//               {formatStats(
-//                 ((getSum(player.twoMakes) + getSum(player.threeMakes)) /
-//                   (getSum(player.twoAttempts) + getSum(player.threeAttempts))) *
-//                   100
-//               )}
-//             </td>
-//             <td>{formatStats((getSum(player.threeMakes) / getSum(player.threeAttempts)) * 100)}</td>
-//             <td>{formatStats((getSum(player.ftMakes) / getSum(player.ftAttempts)) * 100)}</td>
-//           </tr>
-//         );
-//       }
-//       return null;
-//     });
+        this.setState({
+          player_totals: sorted_player_totals,
+          isLoading: false,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
-//     const statFilter = () => {
-//       const filterNumbers = teams.map((team) => {
-//         if ((teams.indexOf(team) + 1).toString() === this.state.page) {
-//           return (
-//             <p className="stat-filter yellow" onClick={this.handleClick}>
-//               {this.state.page}
-//             </p>
-//           );
-//         } else {
-//           return (
-//             <p className="stat-filter" onClick={this.handleClick}>
-//               {teams.indexOf(team) + 1}
-//             </p>
-//           );
-//         }
-//       });
-//       return filterNumbers;
-//     };
+  render() {
+    if (this.state.isLoading) {
+      return <div className="loader"></div>;
+    }
 
-//     return (
-//       <>
-//         <div className="row">
-//           <h1 className="stats-header">League Leaders</h1>
-//         </div>
-//         <table className="justify-center">
-//           <tbody>
-//             <tr>
-//               <th className="player-stats-header">RANK</th>
-//               <th className="player-stats-header">PLAYER</th>
-//               <th className="player-stats-header">TEAM</th>
-//               <th className="player-stats-header">GP</th>
-//               <th className="player-stats-header">PTS</th>
-//               <th className="player-stats-header">FG</th>
-//               <th className="player-stats-header">FG%</th>
-//               <th className="player-stats-header">3P%</th>
-//               <th className="player-stats-header">FT%</th>
-//             </tr>
-//             {tableContent}
-//           </tbody>
-//         </table>
-//         <div className="row justify-center">{statFilter()}</div>
-//       </>
-//     );
-//   }
-// }
+    let playerStats = this.state.player_totals.map((player, index) => {
+      let ppg = !isNaN(player.points / player.games_played)
+        ? (player.points / player.games_played).toFixed(1)
+        : "-";
+      let fg_percentage = !isNaN(
+        (player.two_made + player.three_made) /
+          (player.two_attempts + player.three_attempts)
+      )
+        ? (
+            ((player.two_made + player.three_made) /
+              (player.two_attempts + player.three_attempts)) *
+            100
+          ).toFixed(1) + "%"
+        : "-";
+      let three_percentage = !isNaN(player.three_made / player.three_attempts)
+        ? ((player.three_made / player.three_attempts) * 100).toFixed(1) + "%"
+        : "-";
+
+      let ft_percentage = !isNaN(player.ft_made / player.ft_attempts)
+        ? ((player.ft_made / player.ft_attempts) * 100).toFixed(1) + "%"
+        : "-";
+      return (
+        <tr>
+          <td>{index + 1}</td>
+          <td>{player.name}</td>
+          <td>{player.team}</td>
+          <td>{player.games_played}</td>
+          <td>{ppg}</td>
+          <td>
+            {player.two_made +
+              player.three_made +
+              "/" +
+              (player.two_attempts + player.three_attempts)}
+          </td>
+          <td>{fg_percentage}</td>
+          <td>{player.three_made + "/" + player.three_attempts}</td>
+          <td>{three_percentage}</td>
+          <td>{player.ft_made + "/" + player.ft_attempts}</td>
+          <td>{ft_percentage}</td>
+        </tr>
+      );
+    });
+    return (
+      <>
+        <table className="justify-center">
+          <caption className="team-name">Players</caption>
+          <tbody>
+            <tr>
+              <th className="player-stats-header">Rank</th>
+              <th className="player-stats-header">Player</th>
+              <th className="player-stats-header">Team</th>
+              <th className="player-stats-header">GP</th>
+              <th className="player-stats-header">PTS</th>
+              <th className="player-stats-header">FG</th>
+              <th className="player-stats-header">FG%</th>
+              <th className="player-stats-header">3P</th>
+              <th className="player-stats-header">3P%</th>
+              <th className="player-stats-header">FT</th>
+              <th className="player-stats-header">FT%</th>
+            </tr>
+            {playerStats}
+          </tbody>
+        </table>
+        <div className="row justify-center">{}</div>
+      </>
+    );
+  }
+}

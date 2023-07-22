@@ -1,5 +1,5 @@
 import React from "react";
-import TeamStatsFilter from "./team-stat-filter";
+import { getTeamTotals } from "../functions/helper-stats";
 
 export default class TeamStats extends React.Component {
   constructor(props) {
@@ -17,140 +17,67 @@ export default class TeamStats extends React.Component {
     });
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    getTeamTotals()
+      .then((teamStatsData) => {
+        console.log(JSON.stringify(teamStatsData, null, 2));
+        this.setState({ team_stats: teamStatsData, isLoading: false });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   render() {
     if (this.state.isLoading) {
       return <div className="loader"></div>;
     }
 
-    const data = () => {
-      if (this.state.page === "general") {
-        return (
-          <>
-            <div className="row justify-center">
-              <p
-                className="stat-filter team-stat-filter yellow"
-                onClick={this.handleClick}
-              >
-                general
-              </p>
-              <p
-                className="stat-filter team-stat-filter"
-                onClick={this.handleClick}
-              >
-                offense
-              </p>
-              <p
-                className="stat-filter team-stat-filter"
-                onClick={this.handleClick}
-              >
-                defense
-              </p>
-            </div>
-            <table>
-              <tbody>
-                <tr>
-                  <th className="stat-heading">SEED</th>
-                  <th className="stat-heading">TEAM</th>
-                  <th className="stat-heading">GP</th>
-                  <th className="stat-heading">W-L</th>
-                  <th className="stat-heading">PTS</th>
-                  <th className="stat-heading">PTS ALLOWED</th>
-                  <th className="stat-heading">PT DIFF</th>
-                </tr>
-                <TeamStatsFilter state={this.state} />
-              </tbody>
-            </table>
-          </>
-        );
+    let sortedTeamStats = this.state.team_stats.sort((a, b) => {
+      if (a.wins === b.wins) {
+        if (a.pd === b.pd) {
+          return b.ppg - a.ppg;
+        }
+        return b.pd - a.pd;
+      } else {
+        return b.wins - a.wins;
       }
+    });
 
-      if (this.state.page === "offense") {
-        return (
-          <>
-            <div className="row justify-center">
-              <p
-                className="stat-filter team-stat-filter"
-                onClick={this.handleClick}
-              >
-                general
-              </p>
-              <p
-                className="stat-filter team-stat-filter yellow"
-                onClick={this.handleClick}
-              >
-                offense
-              </p>
-              <p
-                className="stat-filter team-stat-filter"
-                onClick={this.handleClick}
-              >
-                defense
-              </p>
-            </div>
-            <table>
-              <tbody>
-                <tr>
-                  <th className="stat-heading">TEAM</th>
-                  <th className="stat-heading">PTS</th>
-                  <th className="stat-heading">FG</th>
-                  <th className="stat-heading">FG%</th>
-                  <th className="stat-heading">3P</th>
-                  <th className="stat-heading">3P%</th>
-                  <th className="stat-heading">FT</th>
-                  <th className="stat-heading">FT%</th>
-                </tr>
-                <TeamStatsFilter state={this.state} />
-              </tbody>
-            </table>
-          </>
-        );
-      }
+    let teamStats = sortedTeamStats.map((team, index) => {
+      return (
+        <tr>
+          <td>{index + 1}</td>
+          <td>{team.name}</td>
+          <td>{team.games_played}</td>
+          <td>{team.wins}</td>
+          <td>{team.losses}</td>
+          <td>{team.ppg.toFixed(1)}</td>
+          <td>{team.papg.toFixed(1)}</td>
+          <td>{team.pd}</td>
+        </tr>
+      );
+    });
 
-      if (this.state.page === "defense") {
-        return (
-          <>
-            <div className="row justify-center">
-              <p
-                className="stat-filter team-stat-filter"
-                onClick={this.handleClick}
-              >
-                general
-              </p>
-              <p
-                className="stat-filter team-stat-filter"
-                onClick={this.handleClick}
-              >
-                offense
-              </p>
-              <p
-                className="stat-filter team-stat-filter yellow"
-                onClick={this.handleClick}
-              >
-                defense
-              </p>
-            </div>
-            <table>
-              <tbody>
-                <tr>
-                  <th className="stat-heading">TEAM</th>
-                  <th className="stat-heading">PTS ALLOWED</th>
-                  <th className="stat-heading">Opp FG</th>
-                  <th className="stat-heading">Opp FG%</th>
-                  <th className="stat-heading">Opp 3P</th>
-                  <th className="stat-heading">Opp 3P%</th>
-                  <th className="stat-heading">Opp FT</th>
-                  <th className="stat-heading">Opp FT%</th>
-                </tr>
-                <TeamStatsFilter state={this.state} />
-              </tbody>
-            </table>
-          </>
-        );
-      }
-    };
-
-    return <>{data()}</>;
+    return (
+      <>
+        <table>
+          <caption className="team-name">Teams</caption>
+          <tbody>
+            <tr>
+              <th className="stat-heading">Rank</th>
+              <th className="stat-heading">Team</th>
+              <th className="stat-heading">GP</th>
+              <th className="stat-heading">W</th>
+              <th className="stat-heading">L</th>
+              <th className="stat-heading">PPG</th>
+              <th className="stat-heading">PAPG</th>
+              <th className="stat-heading">PD</th>
+            </tr>
+            {teamStats}
+          </tbody>
+        </table>
+      </>
+    );
   }
 }

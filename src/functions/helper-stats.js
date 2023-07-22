@@ -22,20 +22,31 @@ export const createBoxScore = async (week, game) => {
       playerObject.name = array.c[1]?.v || "-";
       playerObject.fg_made = (array.c[2]?.v || 0) + (array.c[5]?.v || 0);
       playerObject.fg_attempts = (array.c[3]?.v || 0) + (array.c[6]?.v || 0);
-      playerObject.fg_percentage = array.c[10]?.f;
-
+      playerObject.fg_percentage = isNaN(
+        playerObject.fg_made / playerObject.fg_attempts
+      )
+        ? "0.0%"
+        : ((playerObject.fg_made / playerObject.fg_attempts) * 100)
+            .toFixed(1)
+            .toString() + "%";
       playerObject.three_made = array.c[5]?.v || 0;
       playerObject.three_attempts = array.c[6]?.v || 0;
       playerObject.three_percentage = isNaN(
         (playerObject.three_made / playerObject.three_attempts) * 100
       )
-        ? "0.00%"
+        ? "0.0%"
         : ((playerObject.three_made / playerObject.three_attempts) * 100)
-            .toFixed(2)
+            .toFixed(1)
             .toString() + "%";
       playerObject.ft_made = array.c[11]?.v || 0;
       playerObject.ft_attempts = array.c[12]?.v || 0;
-      playerObject.ft_percentage = array.c[14]?.f;
+      playerObject.ft_percentage = isNaN(
+        playerObject.ft_made / playerObject.ft_attempts
+      )
+        ? "0.0%"
+        : ((playerObject.ft_made / playerObject.ft_attempts) * 100)
+            .toFixed(1)
+            .toString() + "%";
       playerObject.points = array.c[15]?.v || 0;
       playerObject.fouls = array.c[20]?.v || 0;
 
@@ -82,16 +93,16 @@ export const calculateTotals = (data) => {
 
     if (totalStats.fg_attempts > 0) {
       totalStats.fg_percentage =
-        ((totalStats.fg_made / totalStats.fg_attempts) * 100).toFixed(2) + "%";
+        ((totalStats.fg_made / totalStats.fg_attempts) * 100).toFixed(1) + "%";
     }
     if (totalStats.three_attempts > 0) {
       totalStats.three_percentage =
-        ((totalStats.three_made / totalStats.three_attempts) * 100).toFixed(2) +
+        ((totalStats.three_made / totalStats.three_attempts) * 100).toFixed(1) +
         "%";
     }
     if (totalStats.ft_attempts > 0) {
       totalStats.ft_percentage =
-        ((totalStats.ft_made / totalStats.ft_attempts) * 100).toFixed(2) + "%";
+        ((totalStats.ft_made / totalStats.ft_attempts) * 100).toFixed(1) + "%";
     }
 
     return totalStats;
@@ -129,4 +140,29 @@ export const getPlayerTotals = async () => {
   return playerTotals;
 };
 
-export const getTeamTotals = async () => {};
+export const getTeamTotals = async () => {
+  const SHEET_RANGE = "Team Total Stats!A1:G12";
+  const FULL_URL =
+    "https://docs.google.com/spreadsheets/d/" +
+    SHEET_ID +
+    "/gviz/tq?sheet=" +
+    SHEET_TITLE +
+    "&range=" +
+    SHEET_RANGE;
+
+  const res = await fetch(FULL_URL);
+  const rep = await res.text();
+  const data = JSON.parse(rep.substring(47, rep.length - 2));
+  const teamTotals = data.table.rows.map((array) => {
+    const teamObject = {};
+    teamObject.name = array.c[0].v;
+    teamObject.games_played = array.c[1].v;
+    teamObject.wins = array.c[2].v;
+    teamObject.losses = array.c[3].v;
+    teamObject.ppg = array.c[4]?.v || 0;
+    teamObject.papg = array.c[5].v;
+    teamObject.pd = array.c[6]?.v || 0;
+    return teamObject;
+  });
+  return teamTotals;
+};

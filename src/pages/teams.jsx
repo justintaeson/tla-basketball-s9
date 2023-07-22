@@ -59,21 +59,21 @@ export default class Teams extends React.Component {
               ((player.two_made + player.three_made) /
                 (player.two_attempts + player.three_attempts)) *
               100
-            ).toFixed(2) + "%"
+            ).toFixed(1) + "%"
           : "-";
       const threePercentage =
         player.three_made / player.three_attempts >= 0 &&
         player.games_played > 0
-          ? ((player.three_made / player.three_attempts) * 100).toFixed(2) + "%"
+          ? ((player.three_made / player.three_attempts) * 100).toFixed(1) + "%"
           : "-";
       const ftPercentage =
         player.ft_made / player.ft_attempts >= 0 && player.games_played > 0
-          ? ((player.ft_made / player.ft_attempts) * 100).toFixed(2) + "%"
+          ? ((player.ft_made / player.ft_attempts) * 100).toFixed(1) + "%"
           : "-";
 
       const ppg =
         player.points / player.games_played >= 0
-          ? (player.points / player.games_played).toFixed(2)
+          ? (player.points / player.games_played).toFixed(1)
           : "-";
       if (player.team === this.state.team) {
         return (
@@ -164,13 +164,11 @@ export default class Teams extends React.Component {
     } else {
       return (
         <>
-          <div className="row">
-            <h1 className="stats-header">{this.state.team}</h1>
-          </div>
           <table className="teams-table">
+            <caption className="team-name">{this.state.team}</caption>
             <tbody>
               <tr>
-                <th className="stat-heading">PLAYER</th>
+                <th className="stat-heading">Player</th>
                 <th className="stat-heading">GP</th>
                 <th className="stat-heading">FG</th>
                 <th className="stat-heading">FG%</th>
@@ -178,7 +176,7 @@ export default class Teams extends React.Component {
                 <th className="stat-heading">3PT%</th>
                 <th className="stat-heading">FT</th>
                 <th className="stat-heading">FT%</th>
-                <th className="stat-heading">PPG</th>
+                <th className="stat-heading">PTS</th>
               </tr>
               {playersData}
               {teamTotals(this.state.player_totals, this.state.team)}

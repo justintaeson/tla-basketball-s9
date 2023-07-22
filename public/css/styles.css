@@ -92,9 +92,9 @@ table {
 
 .stat-type {
   border: 2px solid black;
-  padding: 5rem 8rem;
+  padding: 3rem 8rem;
   width: 5rem;
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 .player-stat-header {

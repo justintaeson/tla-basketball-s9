@@ -135,7 +135,7 @@ body {
 
 .touch-target {
   font-size: large;
-  padding: 2rem;
+  padding: 1rem 2rem;
 }
 
 .home-content,
@@ -162,7 +162,7 @@ table {
 th,
 td {
   text-align: center;
-  padding: 0.5rem 1rem;
+  padding: 0.4rem;
 }
 
 table,
@@ -238,6 +238,11 @@ td {
   display: inline-flex;
 }
 
+.team-container {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+}
+
 @media screen and (max-width: 768px) {
   .column-one-half {
     max-width: 50%;
@@ -270,7 +275,7 @@ td {
   }
 
   .stats-container {
-    height: auto;
+    height: 80vh;
   }
 
   .stat-filter {
@@ -295,10 +300,6 @@ td {
 
   #update-text {
     top: 50%;
-  }
-
-  .team-container {
-    padding: 2rem 0;
   }
 
   .teams-box {

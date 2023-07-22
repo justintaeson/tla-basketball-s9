@@ -1,5 +1,6 @@
 import React from "react";
-
+import TeamStats from "./team-stats";
+import PlayerStats from "./player-stats";
 export default class Stats extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +12,7 @@ export default class Stats extends React.Component {
 
   handleClick(event) {
     if (event.target.innerText) {
-      window.location.hash = "#stats/" + event.target.innerText;
+      window.location.hash = "#stats/" + event.target.innerText.toLowerCase();
       this.setState({
         statType: event.target.innerText,
       });
@@ -29,35 +30,28 @@ export default class Stats extends React.Component {
   }
 
   render() {
-    // if (this.state.statType === "Team") {
-    //   return <TeamStats />;
-    // }
-    // if (this.state.statType === "Player") {
-    //   return <PlayerStats />;
-    // }
-    // return (
-    //   <div className="stats-container">
-    //     <div
-    //       id="stat-type-team"
-    //       className="row justify-center"
-    //       onClick={this.handleClick}
-    //     >
-    //       <div className="stat-type">Team Stats</div>
-    //     </div>
-    //     <div
-    //       id="stat-type-player"
-    //       className="row justify-center"
-    //       onClick={this.handleClick}
-    //     >
-    //       <div className="stat-type">Player Stats</div>
-    //     </div>
-    //   </div>
-    // );
-
+    if (this.state.statType === "Teams") {
+      return <TeamStats />;
+    }
+    if (this.state.statType === "Players") {
+      return <PlayerStats />;
+    }
     return (
-      <div className="row justify-center patience">
-        The Stats section is currently development and will be available
-        shortly. Thanks for your patience!
+      <div className="stats-container">
+        <div
+          id="stat-type-team"
+          className="row justify-center"
+          onClick={this.handleClick}
+        >
+          <div className="stat-type">Teams</div>
+        </div>
+        <div
+          id="stat-type-player"
+          className="row justify-center"
+          onClick={this.handleClick}
+        >
+          <div className="stat-type">Players</div>
+        </div>
       </div>
     );
   }
