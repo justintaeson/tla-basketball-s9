@@ -78,22 +78,26 @@ export default class PlayerStats extends React.Component {
           : "-";
         return (
           <tr>
-            <td>{index + 1}</td>
-            <td>{player.name}</td>
-            <td>{player.team}</td>
-            <td>{player.games_played}</td>
-            <td>{ppg}</td>
-            <td>
+            <td className="player-stats">{index + 1}</td>
+            <td className="player-stats">{player.name}</td>
+            <td className="player-stats">{player.team}</td>
+            <td className="player-stats">{player.games_played}</td>
+            <td className="player-stats">{ppg}</td>
+            <td className="player-stats">
               {player.two_made +
                 player.three_made +
                 "/" +
                 (player.two_attempts + player.three_attempts)}
             </td>
-            <td>{fg_percentage}</td>
-            <td>{player.three_made + "/" + player.three_attempts}</td>
-            <td>{three_percentage}</td>
-            <td>{player.ft_made + "/" + player.ft_attempts}</td>
-            <td>{ft_percentage}</td>
+            <td className="player-stats">{fg_percentage}</td>
+            <td className="player-stats">
+              {player.three_made + "/" + player.three_attempts}
+            </td>
+            <td className="player-stats">{three_percentage}</td>
+            <td className="player-stats">
+              {player.ft_made + "/" + player.ft_attempts}
+            </td>
+            <td className="player-stats">{ft_percentage}</td>
           </tr>
         );
       });
@@ -103,17 +107,17 @@ export default class PlayerStats extends React.Component {
           <caption className="team-name">Players</caption>
           <tbody>
             <tr>
-              <th className="player-stats-header">Rank</th>
-              <th className="player-stats-header">Player</th>
-              <th className="player-stats-header">Team</th>
-              <th className="player-stats-header">GP</th>
-              <th className="player-stats-header">PTS</th>
-              <th className="player-stats-header">FG</th>
-              <th className="player-stats-header">FG%</th>
-              <th className="player-stats-header">3P</th>
-              <th className="player-stats-header">3P%</th>
-              <th className="player-stats-header">FT</th>
-              <th className="player-stats-header">FT%</th>
+              <th className="player-stats-header player-stats">Rank</th>
+              <th className="player-stats-header player-stats">Player</th>
+              <th className="player-stats-header player-stats">Team</th>
+              <th className="player-stats-header player-stats">GP</th>
+              <th className="player-stats-header player-stats">PTS</th>
+              <th className="player-stats-header player-stats">FG</th>
+              <th className="player-stats-header player-stats">FG%</th>
+              <th className="player-stats-header player-stats">3P</th>
+              <th className="player-stats-header player-stats">3P%</th>
+              <th className="player-stats-header player-stats">FT</th>
+              <th className="player-stats-header player-stats">FT%</th>
             </tr>
             {playerStats}
           </tbody>

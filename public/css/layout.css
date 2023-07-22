@@ -253,6 +253,10 @@ td {
     padding: 0.4rem;
   }
 
+  .player-stats {
+    padding: 0.3rem;
+  }
+
   .stat-heading,
   td {
     font-size: 0.4rem;
