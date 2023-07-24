@@ -26,10 +26,14 @@ export class GameStats extends React.Component {
 
   render() {
     const renderPlayerRows = (teamType) => {
+      let team = this.state.home_team;
       let startIndex = 0;
       let endIndex = 10;
-      let team = this.state.home_team;
+
       let totals = calculateTotals(this.state.box_score)[0];
+      if (team === "GangGang") {
+        endIndex = 9;
+      }
 
       if (this.state.isLoading) {
         return <div className="loader"></div>;
@@ -40,6 +44,9 @@ export class GameStats extends React.Component {
         endIndex = this.state.box_score.length;
         team = this.state.away_team;
         totals = calculateTotals(this.state.box_score)[1];
+        if (team === "GangGang") {
+          startIndex = this.state.box_score.length - 9;
+        }
       }
 
       return (

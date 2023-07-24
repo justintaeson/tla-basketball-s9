@@ -52,11 +52,17 @@ export const createBoxScore = async (week, game) => {
 
       return playerObject;
     });
+
   return boxScore;
 };
 
 export const calculateTotals = (data) => {
-  const teams = [data.slice(0, 10), data.slice(10)];
+  let teams = [data.slice(0, 10), data.slice(10)];
+
+  if (data[8]?.name === "Robin Choi") {
+    teams = [data.slice(0, 9), data.slice(9)];
+  }
+
   return teams.map((team) => {
     const totalStats = {
       name: "Total",
