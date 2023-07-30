@@ -43,6 +43,8 @@ export default class TeamStats extends React.Component {
       }
     });
 
+    console.log(sortedTeamStats);
+
     let teamStats = sortedTeamStats.map((team, index) => {
       return (
         <tr>
@@ -53,7 +55,7 @@ export default class TeamStats extends React.Component {
           <td>{team.losses}</td>
           <td>{team.ppg.toFixed(1)}</td>
           <td>{team.papg.toFixed(1)}</td>
-          <td>{team.pd}</td>
+          <td>{team.pd.toFixed()}</td>
         </tr>
       );
     });
