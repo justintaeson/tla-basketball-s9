@@ -27,13 +27,6 @@ export default class NavBar extends React.Component {
     }
   }
 
-  componentDidMount() {
-    window.scroll({
-      top: 0,
-      behavior: "smooth",
-    });
-  }
-
   render() {
     window.scroll({
       top: 0,
