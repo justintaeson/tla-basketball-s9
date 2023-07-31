@@ -34,16 +34,17 @@ export default class TeamStats extends React.Component {
 
     let sortedTeamStats = this.state.team_stats.sort((a, b) => {
       if (a.wins === b.wins) {
-        if (a.pd === b.pd) {
-          return b.ppg - a.ppg;
+        if (a.losses === b.losses) {
+          if (a.pd === b.pd) {
+            return b.ppg - a.ppg;
+          }
+          return b.pd - a.pd;
         }
-        return b.pd - a.pd;
+        return a.losses - b.losses; // team with the least amount of losses should be at the top
       } else {
         return b.wins - a.wins;
       }
     });
-
-    console.log(sortedTeamStats);
 
     let teamStats = sortedTeamStats.map((team, index) => {
       return (
