@@ -1,9 +1,9 @@
 import React from "react";
-import Home from "./pages/Home";
+import Home from "./pages/home";
 import Navbar from "./components/Navbar";
 import Schedule from "./pages/Schedule";
-import Teams from "./pages/Teams";
-import Stats from "./pages/Stats";
+import Teams from "./pages/teams";
+import Stats from "./pages/stats";
 
 export default class App extends React.Component {
   constructor(props) {
