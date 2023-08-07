@@ -1,6 +1,6 @@
 import React from "react";
+import { getPlayerTotals } from "../helpers/get-player-totals";
 
-import { getPlayerTotals } from "../functions/helper-stats";
 export default class PlayerStats extends React.Component {
   constructor(props) {
     super(props);

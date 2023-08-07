@@ -1,9 +1,9 @@
 import React from "react";
-import Home from "./pages/home";
-import NavBar from "./navbar";
-import Schedule from "./pages/season-schedule";
-import Teams from "./pages/teams";
-import Stats from "./pages/stats";
+import Home from "./pages/Home";
+import Navbar from "./components/Navbar";
+import Schedule from "./pages/Schedule";
+import Teams from "./pages/Teams";
+import Stats from "./pages/Stats";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -29,7 +29,7 @@ export default class App extends React.Component {
       };
       return (
         <>
-          <NavBar />
+          <Navbar />
           <Home />
         </>
       );
@@ -40,7 +40,7 @@ export default class App extends React.Component {
       };
       return (
         <>
-          <NavBar />
+          <Navbar />
           <Schedule />
         </>
       );
@@ -51,7 +51,7 @@ export default class App extends React.Component {
       };
       return (
         <>
-          <NavBar />
+          <Navbar />
           <Teams />
         </>
       );
@@ -59,7 +59,7 @@ export default class App extends React.Component {
     if (hash === "#stats" || hash.slice(0, 7) === "#stats/") {
       return (
         <>
-          <NavBar />
+          <Navbar />
           <Stats />
         </>
       );

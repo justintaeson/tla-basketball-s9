@@ -1,6 +1,6 @@
 import React from "react";
-import TeamStats from "./team-stats";
-import PlayerStats from "./player-stats";
+import TeamStats from "./TeamStats";
+import PlayerStats from "./PlayerStats";
 export default class Stats extends React.Component {
   constructor(props) {
     super(props);

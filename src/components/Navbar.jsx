@@ -1,5 +1,5 @@
 import React from "react";
-import TapestryLALogo from "./assets/tapestry-logo.png";
+import TLASportsLogo from "../assets/tapestry-logo.png";
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -38,7 +38,7 @@ export default class NavBar extends React.Component {
           <div className="column-one-fourth align-center">
             <img
               id="logo"
-              src={TapestryLALogo}
+              src={TLASportsLogo}
               alt="TapestryLA-logo"
               onClick={this.handleClick}
             />

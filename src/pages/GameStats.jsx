@@ -1,5 +1,6 @@
 import React from "react";
-import { createBoxScore, calculateTotals } from "../functions/helper-stats";
+import { createBoxscore } from "../helpers/get-boxscore";
+import { calculateGameTotals } from "../helpers/calculate-game-totals";
 
 export class GameStats extends React.Component {
   constructor(props) {
@@ -15,7 +16,7 @@ export class GameStats extends React.Component {
   }
 
   componentDidMount() {
-    createBoxScore(this.state.week, this.state.game)
+    createBoxscore(this.state.week, this.state.game)
       .then((boxScoreData) => {
         this.setState({ box_score: boxScoreData, isLoading: false });
       })
@@ -30,7 +31,7 @@ export class GameStats extends React.Component {
       let startIndex = 0;
       let endIndex = 10;
 
-      let totals = calculateTotals(this.state.box_score)[0];
+      let totals = calculateGameTotals(this.state.box_score)[0];
       if (team === "GangGang") {
         endIndex = 9;
       }
@@ -43,7 +44,7 @@ export class GameStats extends React.Component {
         startIndex = this.state.box_score.length - 10;
         endIndex = this.state.box_score.length;
         team = this.state.away_team;
-        totals = calculateTotals(this.state.box_score)[1];
+        totals = calculateGameTotals(this.state.box_score)[1];
         if (team === "GangGang") {
           startIndex = this.state.box_score.length - 9;
         }

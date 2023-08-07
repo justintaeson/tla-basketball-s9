@@ -1,6 +1,6 @@
 import React from "react";
-import { createSchedule } from "../functions/helper-schedule";
-import { GameStats } from "./game-stats";
+import { createSchedule } from "../helpers/get-schedule";
+import { GameStats } from "./GameStats";
 
 export default class Schedule extends React.Component {
   constructor(props) {
@@ -42,7 +42,7 @@ export default class Schedule extends React.Component {
   componentDidMount() {
     createSchedule()
       .then((scheduleData) => {
-        this.setState({ week: 3, schedule: scheduleData, isLoading: false });
+        this.setState({ week: 4, schedule: scheduleData, isLoading: false });
       })
       .catch((error) => {
         console.error(error);
