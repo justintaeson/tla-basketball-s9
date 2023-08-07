@@ -9,30 +9,15 @@ export default class Home extends React.Component {
       view: "desktop",
     };
   }
-  componentDidMount() {
-    if (window.innerWidth <= 768) {
-      this.setState({
-        view: "mobile",
-      });
-    }
-  }
 
   render() {
-    let background = () => {
-      if (this.state.view === "desktop") {
-        return (
-          <video id="about-video" autoPlay loop muted>
-            <source src={BasketballStockFootage} type="video/mp4" />
-          </video>
-        );
-      }
-
-      return <img id="home-image" src={MobileHomeImage} alt="mobile-home" />;
-    };
     return (
       <main id="main overlay-hidden" className="height-vh">
         <div id="video-row" className="row justify-center">
-          {background()}
+          <video id="about-video" autoPlay loop muted>
+            <source src={BasketballStockFootage} type="video/mp4" />
+          </video>
+          <img id="home-image" src={MobileHomeImage} alt="mobile-home" />
           <h1 id="tapestry-la" className="home-text">
             Tapestry LA
           </h1>

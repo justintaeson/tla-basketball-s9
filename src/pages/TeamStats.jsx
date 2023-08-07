@@ -1,5 +1,5 @@
 import React from "react";
-import { getTeamTotals } from "../functions/helper-stats";
+import { getTeamTotals } from "../helpers/get-team-totals";
 
 export default class TeamStats extends React.Component {
   constructor(props) {

@@ -21,6 +21,12 @@ body {
   filter: brightness(50%);
 }
 
+@media screen and (min-width: 769px) {
+  #home-image {
+    display: none;
+  }
+}
+
 .home-content,
 .away-content {
   font-size: 16px;
@@ -186,6 +192,10 @@ table {
   }
 }
 @media screen and (max-width: 768px) {
+  #about-video {
+    display: none;
+  }
+
   .stats-header {
     font-size: 16px;
     padding: 1rem 0;
