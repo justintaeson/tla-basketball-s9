@@ -28,6 +28,7 @@ export default class TeamStats extends React.Component {
   }
 
   render() {
+    console.log(this.state.team_stats);
     if (this.state.isLoading) {
       return <div className="loader"></div>;
     }
