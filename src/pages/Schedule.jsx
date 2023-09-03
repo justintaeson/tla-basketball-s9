@@ -12,6 +12,7 @@ export default class Schedule extends React.Component {
       homeTeam: "",
       schedule: [],
       isLoading: true,
+      weekGameCounts: {},
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -26,7 +27,6 @@ export default class Schedule extends React.Component {
       this.setState({
         week: this.state.week,
         game: event.target.dataset.game,
-
         awayTeam:
           event.target.parentNode.previousElementSibling.children[1].children[0]
             .innerText,
@@ -42,7 +42,17 @@ export default class Schedule extends React.Component {
   componentDidMount() {
     createSchedule()
       .then((scheduleData) => {
-        this.setState({ week: 6, schedule: scheduleData, isLoading: false });
+        const weekGameCounts = {};
+        scheduleData.forEach((game) => {
+          weekGameCounts[game.week] = (weekGameCounts[game.week] || 0) + 1;
+        });
+
+        this.setState({
+          week: 7,
+          schedule: scheduleData,
+          isLoading: false,
+          weekGameCounts,
+        });
       })
       .catch((error) => {
         console.error(error);
@@ -95,9 +105,17 @@ export default class Schedule extends React.Component {
       return <GameStats state={this.state} />;
     } else if (window.location.hash === "#schedule") {
       let gameID = 0;
+      let previousWeek = null;
 
       const schedule = this.state.schedule.map((games, index) => {
-        gameID > 3 ? (gameID = 1) : (gameID = gameID + 1);
+        const currentWeekGameCount = this.state.weekGameCounts[games.week] || 0;
+
+        if (games.week !== previousWeek) {
+          gameID = 0;
+          previousWeek = games.week;
+        }
+
+        gameID = (gameID % currentWeekGameCount) + 1;
 
         if (games.week === this.state.week) {
           if (games.awayTeam === "Open Gym") {
