@@ -28,6 +28,5 @@ export const getPlayerTotals = async () => {
     playerObject.ft_attempts = array.c[9].v;
     return playerObject;
   });
-  console.log(playerTotals);
   return playerTotals;
 };

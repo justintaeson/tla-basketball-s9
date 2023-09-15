@@ -48,7 +48,7 @@ export default class Schedule extends React.Component {
         });
 
         this.setState({
-          week: 7,
+          week: 9,
           schedule: scheduleData,
           isLoading: false,
           weekGameCounts,

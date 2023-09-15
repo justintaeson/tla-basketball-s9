@@ -24,6 +24,5 @@ export const getTeamTotals = async () => {
     teamObject.pd = array.c[6]?.v || 0;
     return teamObject;
   });
-  console.log(teamTotals);
   return teamTotals;
 };
