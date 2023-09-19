@@ -20,7 +20,7 @@ export default class Schedule extends React.Component {
   handleClick(event) {
     if (event.target.innerText.includes("W")) {
       this.setState({
-        week: parseInt(event.target.innerText[1]),
+        week: parseInt(event.target.innerText.slice(1)),
       });
     } else if (event.target.innerText.includes("Stats")) {
       window.location.hash = "#schedule/week" + this.state.week;
@@ -48,7 +48,7 @@ export default class Schedule extends React.Component {
         });
 
         this.setState({
-          week: 9,
+          week: 10,
           schedule: scheduleData,
           isLoading: false,
           weekGameCounts,
@@ -64,14 +64,16 @@ export default class Schedule extends React.Component {
       return <div className="loader"></div>;
     }
 
+    let firstHalf = [];
+    let secondHalf = [];
+
     const weeks = this.state.schedule
       .map((game) => game.week)
       .filter((value, index, self) => self.indexOf(value) === index);
-    let firstHalf = [];
-    let secondHalf = [];
+
     const scheduleFilter = (row) => {
       if (row === 2) {
-        secondHalf = weeks.filter((week) => week > 5);
+        secondHalf = weeks.filter((week) => week > 5 && week < 10);
         const filterNumbers = secondHalf.map((week) => {
           return (
             <p
@@ -83,6 +85,7 @@ export default class Schedule extends React.Component {
             </p>
           );
         });
+
         return filterNumbers;
       } else {
         firstHalf = weeks.filter((week) => week <= 5);
@@ -143,6 +146,46 @@ export default class Schedule extends React.Component {
               </>
             );
           }
+
+          if (index === this.state.schedule.length - 1) {
+            return (
+              <>
+                <div key={games.week + games.time} className="schedule-row">
+                  <div className="box flex-wrap">
+                    <div className="row flex-wrap game-row">
+                      <p className="game-info justify-center">
+                        Week {games.week}
+                      </p>
+                      <p className="game-info justify-center">{games.date}</p>
+                      <p className="game-info justify-center">
+                        {games.time + " - " + games.court}
+                      </p>
+                      <h3 className="row justify-center">Championship</h3>
+                    </div>
+                    <div className="row">
+                      <div className="column-one-half flex-column align-center">
+                        <p className="home-content">{games.homeTeam}</p>
+                        <p className="home-score">{games.homeScore}</p>
+                      </div>
+                      <div className="column-one-half flex-column align-center">
+                        <p className="away-content">{games.awayTeam}</p>
+                        <p className="away-score">{games.awayScore}</p>
+                      </div>
+                    </div>
+                    <div className="row flex-wrap game-row">
+                      <p
+                        className="game-stats justify-center"
+                        data-game={gameID}
+                        onClick={this.handleClick}
+                      >
+                        Stats
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </>
+            );
+          }
           return (
             <>
               <div key={games.week + games.time} className="schedule-row">
@@ -183,7 +226,6 @@ export default class Schedule extends React.Component {
 
         return null;
       });
-
       return (
         <>
           <div className="row stat-filter-row justify-center">
@@ -192,6 +234,16 @@ export default class Schedule extends React.Component {
           <div className="row stat-filter-row justify-center">
             {scheduleFilter(2)}
           </div>
+          <h3 className="row justify-center">Playoffs</h3>
+          <div className="row stat-filter-row justify-center">
+            <p className="stat-filter week-filter" onClick={this.handleClick}>
+              {"W" + 10}
+            </p>
+            <p className="stat-filter week-filter" onClick={this.handleClick}>
+              {"W" + 11}
+            </p>
+          </div>
+
           {schedule}
         </>
       );
